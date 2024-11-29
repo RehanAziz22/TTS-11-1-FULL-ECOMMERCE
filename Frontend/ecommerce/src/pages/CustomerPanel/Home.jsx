@@ -13,8 +13,12 @@ import {
   Rating,
   Box,
   Divider,
+  CircularProgress,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { ArrowCircleRight } from '@mui/icons-material';
+import CarouselComponent from '../../components/CarouselComponent';
+import NavbarComponent from '../../components/NavbarComponent';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -36,11 +40,16 @@ const Home = () => {
 
   if (loading) {
     return (
-      <Container>
-        <Typography variant="h4" textAlign="center" sx={{ mt: 5 }}>
-          Loading products...
-        </Typography>
-      </Container>
+      <>
+        <NavbarComponent />
+        <Container sx={{ mt: 5 }}>
+          <CarouselComponent />
+
+          <Typography variant="h4" textAlign="center" sx={{ mt: 5 }}>
+            <CircularProgress size={45} />
+          </Typography>
+        </Container>
+      </>
     );
   }
 
@@ -49,7 +58,7 @@ const Home = () => {
   const inStockProducts = products.filter((product) => product.stock > 0);
   const categories = Array.from(new Set(products.map((product) => product.category)));
 
-  const renderProductGrid = (productList, category, seeMoreLink) => (
+  const renderProductGrid = (productList, seeMoreLink) => (
     <>
       <Grid container spacing={4}>
         {productList.map((product) => (
@@ -91,27 +100,31 @@ const Home = () => {
             </Card>
           </Grid>
         ))}
+        <Grid sx={{ display: 'flex', justifyContent: 'center', alignItems: "center", mt: 3 }} item xs={12} sm={6} md={4} lg={3} >
+          <Box >
+            <Button
+              // variant="contained"
+              color="primary"
+              onClick={() => navigate(seeMoreLink)}
+              sx={{ display: 'flex', justifyContent: "center", alignItems: 'center' }}
+            >
+              See More<ArrowCircleRight />
+            </Button>
+          </Box>
+        </Grid>
       </Grid>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => navigate(seeMoreLink)}
-        >
-          See More {category && `in ${category}`}
-        </Button>
-      </Box>
     </>
   );
 
-  return (
+  return (<>
+    <NavbarComponent />
     <Container sx={{ mt: 5 }}>
-      <Typography variant="h4" textAlign="center" sx={{ mb: 5 }}>
+      <CarouselComponent />
+      {/* <Typography variant="h4" textAlign="center" sx={{ mb: 5 }}>
         Explore Our Products
-      </Typography>
-
+      </Typography> */}
       {/* Latest Products Section */}
-      <Box sx={{ mb: 5 }}>
+      <Box sx={{ mb: 5,mt:5 }}>
         <Typography variant="h5" gutterBottom>
           Latest Products
         </Typography>
@@ -143,6 +156,7 @@ const Home = () => {
         </Box>
       ))}
     </Container>
+  </>
   );
 };
 

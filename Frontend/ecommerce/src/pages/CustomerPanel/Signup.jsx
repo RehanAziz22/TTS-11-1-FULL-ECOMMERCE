@@ -63,104 +63,103 @@ const Signup = () => {
 
   return (
     <>
-        <NavbarComponent/>
-    <Grid container style={{ minHeight: '90vh' }}>
-      {/* Side Section */}
-      <Grid
-        item
-        xs={12}
-        sm={6}
-        sx={{
-          display: {
-            xs: 'none',
-            sm: 'flex'
-          },
-          
-          backgroundColor: '#000',
-          color: '#fff',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+      <NavbarComponent />
+      <Grid container style={{ minHeight: '90vh' }}>
+        {/* Side Section */}
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          sx={{
+            display: {
+              xs: 'none',
+              sm: 'flex'
+            },
+            backgroundColor: '#000',
+            color: '#fff',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
-        <Typography variant="h3" align="center" style={{ fontWeight: 600 }}>
-          Welcome to Our Platform
-        </Typography>
-      </Grid>
+          <Typography variant="h3" align="center" style={{ fontWeight: 600 }}>
+            Welcome to Our Platform
+          </Typography>
+        </Grid>
 
-      {/* Signup Form */}
-      <Grid item xs={12} sm={6}>
-        <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-          <Paper elevation={3} style={{ padding: '30px', width: '400px' }}>
-            <Typography variant="h4" align="center" gutterBottom>
-              Signup
-            </Typography>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                error={!!error.firstName}
-                helperText={error.firstName}
-                variant="outlined"
-              />
-              <TextField
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                error={!!error.lastName}
-                helperText={error.lastName}
-                variant="outlined"
-                />
-              <TextField
-                label="Email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                error={!!error.email}
-                helperText={error.email}
-                variant="outlined"
-              />
-              <TextField
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                error={!!error.password}
-                helperText={error.password}
-                variant="outlined"
-                />
-              {error.apiError && <Typography color="error">{error.apiError}</Typography>}
-              {successMessage && <Typography color="success">{successMessage}</Typography>}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                style={{
-                  backgroundColor: 'black',
-                  color: 'white',
-                  marginTop: '20px',
-                  border: '1px solid black',
-                }}
-              >
+        {/* Signup Form */}
+        <Grid item xs={12} sm={6}>
+          <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+            <Paper elevation={3} style={{ padding: '30px', width: '400px' }}>
+              <Typography variant="h4" align="center" gutterBottom>
                 Signup
-              </Button>
-            </form>
-          </Paper>
-        </Box>
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  label="First Name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                  error={!!error.firstName}
+                  helperText={error.firstName}
+                  variant="outlined"
+                />
+                <TextField
+                  label="Last Name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                  error={!!error.lastName}
+                  helperText={error.lastName}
+                  variant="outlined"
+                />
+                <TextField
+                  label="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                  error={!!error.email}
+                  helperText={error.email}
+                  variant="outlined"
+                />
+                <TextField
+                  label="Password"
+                  name="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                  error={!!error.password}
+                  helperText={error.password}
+                  variant="outlined"
+                />
+                {error.apiError && <Typography color="error">{error.apiError}</Typography>}
+                {successMessage && <Typography color="success">{successMessage}</Typography>}
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  style={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                    marginTop: '20px',
+                    border: '1px solid black',
+                  }}
+                >
+                  Signup
+                </Button>
+              </form>
+            </Paper>
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
-                </>
+    </>
   );
 };
 
