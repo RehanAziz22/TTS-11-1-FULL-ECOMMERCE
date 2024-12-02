@@ -5,6 +5,7 @@ import Home from './pages/CustomerPanel/Home'
 import Login from './pages/CustomerPanel/Login'
 import Signup from './pages/CustomerPanel/Signup'
 import About from './pages/CustomerPanel/About'
+import AdminDashboard from './pages/AdminPanel/AdminDashboard'
 
 export default function App() {
 
@@ -18,7 +19,17 @@ export default function App() {
         { path: 'signup', element: <Signup /> },
         { path: 'about', element: <About /> },
       ]
-    }
+    },   {
+      path: '/admin',
+      element: <AdminDashboard />,
+      children: [
+        { path: '/', element: <Home /> },
+        { path: '/login', element: <Login /> },
+        { path: '/signup', element: <Signup /> },
+        { path: '/about', element: <About /> },
+      ]
+    },
+
   ])
   return (
     <>

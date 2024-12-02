@@ -7,12 +7,14 @@ const adminController = {
 
         if (!admin) {
             res.json({
-                message: "Admin not found"
+                message: "Admin not found",
+                status:false
             })
         } else {
             res.json({
                 message: "Admin found",
-                data: admin
+                data: admin,
+                status: true
             })
         }
     },
@@ -21,11 +23,13 @@ const adminController = {
         if (admins.length > 0) {
             res.json({
                 message: "Users found",
-                data: admins
+                data: admins,
+                status: true
             })
         } else {
             res.json({
-                message: "No admins found"
+                message: "No admins found",
+                status: false
             })
         }
     },
@@ -35,14 +39,16 @@ const adminController = {
         // Validate the data
         if (!firstName || !lastName || !email || !password) {
             res.json({
-                message: "Please fill in all fields"
+                message: "Please fill in all fields",
+                status: false
             })
         } else {
             // Check if admin already exists
             const admin = await adminModel.findOne({ email })
             if (admin) {
                 res.json({
-                    message: "Admin already exists with this email address"
+                    message: "Admin already exists with this email address",
+                    status: false
                 })
             } else {
                 // Create new admin
@@ -56,6 +62,7 @@ const adminController = {
                 newAdmin.save()
                 res.json({
                     message: "Admin created successfully",
+                    status:true,
                     data: newAdmin
                 })
 
@@ -69,7 +76,8 @@ const adminController = {
         // Validate the data
         if (!email || !password) {
             res.json({
-                message: "Please fill in all fields"
+                message: "Please fill in all fields",
+                status: false
             })
         } else {
             // Check if admin already exists
@@ -80,18 +88,21 @@ const adminController = {
                 if (admin.password === password) {
                     res.json({
                         message: "Logged in successfully",
-                        data: admin
+                        data: admin,
+                        status: true
                     })
                 } else {
                     res.json({
-                        message: "Incorrect password"
+                        message: "Incorrect password",
+                        status: false
                     })
                 }
 
             } else {
 
                 res.json({
-                    message: "account doesnot exist please signup first"
+                    message: "account doesnot exist please signup first",
+                    status: false
                 })
 
             }
@@ -107,11 +118,13 @@ const adminController = {
         if (updateAdmin) {
             res.json({
                 message: "Admin updated successfully",
-                data: updateAdmin
+                data: updateAdmin,
+                status: true
             })
         } else {
             res.json({
-                message: "something went wrong"
+                message: "something went wrong",
+                status: false
             })
         }
     },
@@ -122,11 +135,13 @@ const adminController = {
         if (deleteAdmin) {
             res.json({
                 message: "Admin deleted successfully",
-                data: deleteAdmin
+                data: deleteAdmin,
+                status: true
             })
         } else {
             res.json({
-                message: "something went wrong"
+                message: "something went wrong",
+                status: false
             })
         }
     },

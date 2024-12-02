@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import AnimationIcon from '@mui/icons-material/Animation';
+import AnimationIcon from '@mui/icons-material/Animation';  
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 
@@ -80,7 +80,7 @@ function NavbarComponent() {
                                 textDecoration: 'none',
                             }}
                         >
-                            
+                            NEXTBUY
                         </Typography>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

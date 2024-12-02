@@ -2,6 +2,7 @@ const express = require('express')
 const ConnectDB = require('./config/db')
 const cors = require('cors')
 const app = express()
+require('dotenv').config()
 
 ConnectDB()
 
@@ -25,7 +26,7 @@ app.get("/",(req,res)=>{
 })
 
 
-const PORT = 3000 || 5000 || 8000
+const PORT = process.env.port || 8000
 
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`)
