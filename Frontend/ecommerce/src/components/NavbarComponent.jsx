@@ -12,19 +12,22 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import AnimationIcon from '@mui/icons-material/Animation';  
+import AnimationIcon from '@mui/icons-material/Animation';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
+import { AdminContext } from '../contexts/AdminContext';
 
 const pages = [{ name: 'Products', path: "/" }, { name: 'About', path: '/about' }, { name: 'Blog', path: '/blog' }];
 const settings = [{ name: 'Profile', path: "/profile" }, { name: 'Account', path: "/account" }, { name: 'Logout', path: "/logout" }];
 
 function NavbarComponent() {
-    const { user,logout } = React.useContext(UserContext);
+    const { user, userLogout } = React.useContext(UserContext);
+    const { admin, adminLogout } = React.useContext(AdminContext);
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [isUser, setIsUser] = React.useState(localStorage.getItem('currentUser'))
-   
+    const [isUser, setIsUser] = React.useState(localStorage.getItem('currentUser') || user)
+    const [isAdmin, setIsAdmin] = React.useState(localStorage.getItem('currentAdmin') || admin)
+
     const navigate = useNavigate()
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -53,15 +56,23 @@ function NavbarComponent() {
     // // Logout Function
     const logoutUser = () => {
 
-        console.log("User logged")
-        logout()
-        navigate("/login")
+
+        if (isUser) {
+
+            console.log("User logged")
+            userLogout()
+            navigate("/login")
+        } else if (isAdmin) {
+            console.log("Admin logged")
+            adminLogout()
+            navigate("/admin")
+        }
         handleCloseUserMenu()
-        
+
     };
     return (
         <>
-            <AppBar position="sticky" sx={{ backgroundColor: "black" }}>
+            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "black" }}>
                 <Container maxWidth="xl" >
                     <Toolbar disableGutters>
                         <AnimationIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -147,7 +158,7 @@ function NavbarComponent() {
                                 </Button>
                             ))}
                         </Box>
-                        {isUser ? <Box sx={{ flexGrow: 0 }}>
+                        {isUser||isAdmin ? <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -170,7 +181,7 @@ function NavbarComponent() {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting.name} onClick={()=>{setting.name==="Logout"?logoutUser():navigate(setting.path)}}>
+                                    <MenuItem key={setting.name} onClick={() => { setting.name === "Logout" ? logoutUser() : navigate(setting.path) }}>
                                         <Typography sx={{ textAlign: 'center' }}>{setting.name}</Typography>
                                     </MenuItem>
                                 ))}

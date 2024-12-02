@@ -12,7 +12,7 @@ const FooterComponent = () => {
                 backgroundColor: "black",
                 color: "white",
                 padding: "40px 20px",
-                mt: 5,
+                // mt: 5,
             }}
         >
             <Grid container spacing={3}>

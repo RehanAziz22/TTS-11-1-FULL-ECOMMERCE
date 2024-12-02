@@ -14,20 +14,18 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import NavbarComponent from './NavbarComponent';
+import { useNavigate } from 'react-router-dom';
+import { AdminPanelSettings, Group,Inventory } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
-export default function ClippedDrawer() {
+export default function DrawerComponent({children}) {
+const navigate = useNavigate()
+const pages = [{ name: 'Products', path: "/admin/products",element:<Inventory/> }, { name: 'Users', path: '/admin/users',element:<Group/> }, { name: 'Admins', path: '/admin/admins',element:<AdminPanelSettings/> }];
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      {/* <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Clipped drawer
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
       <NavbarComponent/>
       <Drawer
         variant="permanent"
@@ -40,13 +38,13 @@ export default function ClippedDrawer() {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
+            {pages.map((page) => (
+              <ListItem key={page.name} disablePadding>
+                <ListItemButton onClick={()=>navigate(page.path)}>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                     {page.element}
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={page.name} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -66,8 +64,9 @@ export default function ClippedDrawer() {
           </List>
         </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1 }}>
         <Toolbar />
+        {children}
       </Box>
     </Box>
   );

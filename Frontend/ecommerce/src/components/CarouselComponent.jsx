@@ -34,7 +34,7 @@ const CarouselComponent = () => {
   ];
 
   return (
-    <Box sx={{ maxWidth: "100%", margin: "auto" }}>
+    <Box sx={{ maxWidth: "100%", margin: "auto",marginTop:10 }}>
       <Slider {...settings}>
         {slides.map((slide) => (
         <img src={slide.image} loading="lazy" alt="" />

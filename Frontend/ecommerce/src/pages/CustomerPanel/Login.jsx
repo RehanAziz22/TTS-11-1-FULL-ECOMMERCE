@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/UserContext';
 import NavbarComponent from '../../components/NavbarComponent';
 
 const Login = () => {
-  const { login } = useContext(UserContext);
+  const { userLogin } = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -43,9 +43,9 @@ const Login = () => {
       console.log(response.data.data)
       if (response.data.status) {
 
-        localStorage.setItem('currentUser', JSON.stringify(response.data));
+        localStorage.setItem('currentUser', JSON.stringify(response.data.data));
         setSuccessMessage('Login successful!');
-        login(response.data.data)
+        userLogin(response.data.data)
         setError({});
         console.log('Response:', response.data);
         setFormData({
@@ -66,7 +66,7 @@ const Login = () => {
   return (
     <>
         <NavbarComponent/>
-    <Grid container style={{ minHeight: '90vh' }}>
+    <Grid container style={{ minHeight: '100vh' }}>
       {/* Side Section */}
       <Grid
         item
